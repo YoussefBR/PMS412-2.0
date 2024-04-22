@@ -32,7 +32,7 @@
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.2.0</version>
             <configuration>
-                <mainClass>PMS412.src.main.java.team02.Main</mainClass> <!-- Replace with your actual main class -->
+                <mainClass>team02.Main</mainClass> <!-- Replace with your actual main class -->
             </configuration>
         </plugin>
         <plugin>
@@ -43,7 +43,7 @@
                 <archive>
                     <manifest>
                         <addClasspath>true</addClasspath>
-                        <mainClass>PMS412.src.main.java.team02.Main</mainClass> <!-- Replace with your main class -->
+                        <mainClass>team02.Main</mainClass> <!-- Replace with your main class -->
                     </manifest>
                 </archive>
             </configuration>

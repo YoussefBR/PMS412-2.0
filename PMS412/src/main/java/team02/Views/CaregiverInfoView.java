@@ -1,4 +1,4 @@
-package PMS412.src.main.java.team02.Views;
+package team02.Views;
 
 import javax.swing.*;
 

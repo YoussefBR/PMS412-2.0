@@ -1,4 +1,4 @@
-package PMS412.src.main.java.team02.Models;
+package team02.Models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +14,6 @@ public class Patient extends User {
     private ArrayList<Record> records;
 
     private ArrayList<Medication> medications;
-
-    public Patient(String name, String email, String phoneNumber, LocalDate birthDate, String sex, double weightInPounds, double heightInInches, ArrayList<Record> records, ArrayList<Medication> medications)
-    {
-        super(name, email, phoneNumber);
-        this.birthDate = birthDate;
-        this.sex = sex;
-        this.weightInPounds = weightInPounds;
-        this.heightInInches = heightInInches;
-        this.records = records;
-        this.medications = medications;
-    }
 
     public Patient(String name, String email, String phoneNumber, LocalDate birthDate, String sex, double weightInPounds, double heightInInches)
     {
@@ -47,7 +36,7 @@ public class Patient extends User {
      *
      * @return The birth date of the person as a Date object.
      */
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -56,7 +45,7 @@ public class Patient extends User {
      *
      * @param birthDate The new birth date to be set for the person.
      */
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

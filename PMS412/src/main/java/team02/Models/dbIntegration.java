@@ -1,8 +1,9 @@
-package PMS412.src.main.java.team02.Models;
+package team02.Models;
 
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 
 public class dbIntegration {
 
@@ -59,19 +60,27 @@ public class dbIntegration {
 
     public int addPatient(String name, String email, String phoneNumber, Date birthDate, String sex, double weightInPounds, double heightInInches){
         try{
-            String query = "insert into patients (name, email, phone_number, birth_date, sex, weight, height) values (?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement pstmt = connect.prepareStatement(query);
-            pstmt.setString(1, name);
-            pstmt.setString(2, email);
-            pstmt.setString(3, phoneNumber);
-            pstmt.setDate(4, birthDate);
-            pstmt.setString(5, sex);
-            pstmt.setDouble(6, weightInPounds);
-            pstmt.setDouble(7, heightInInches);
-            pstmt.executeUpdate();
+
+            Statement statement = connect.createStatement();
+
+            String query = String.format("insert into patients (name, email, phone_num, birthDate, sex, weight, height) values ('%s', '%s', '%s', DATE '%s', '%s', %f, %f);", name, email, phoneNumber, birthDate, sex, weightInPounds, heightInInches);
+            statement.executeQuery(query);
+
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            //System.out.println("Error: " + e.getMessage());
         }
-        return 0;
+
+        try{
+            Statement statement = connect.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(String.format("select patient_id from patients where email = '%s';", email));
+            if(resultSet.next()) {
+                return resultSet.getInt("patient_id");
+            }
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return -1;
     }
 }

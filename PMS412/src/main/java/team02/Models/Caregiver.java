@@ -1,4 +1,4 @@
-package PMS412.src.main.java.team02.Models;
+package team02.Models;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ public class Caregiver extends User {
     private String department;
     private List<Patient> patients;
 
-    public Caregiver(int userID, String name, String email, String phoneNumber, String department, List<Patient> patients) {
-        super(userID, name, email, phoneNumber);
+    public Caregiver(String name, String email, String phoneNumber, String department, List<Patient> patients) {
+        super(name, email, phoneNumber);
         this.department = department;
         this.patients = patients;
     }

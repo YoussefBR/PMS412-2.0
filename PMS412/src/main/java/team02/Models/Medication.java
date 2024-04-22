@@ -1,4 +1,4 @@
-package PMS412.src.main.java.team02.Models;
+package team02.Models;
 
 public class Medication {
     private String name;
