@@ -70,9 +70,25 @@ public class dbIntegration {
             //System.out.println("Error: " + e.getMessage());
         }
 
+        return getPatientID(email);
+
+    }
+
+    public boolean updatePatient(int userID, String name, String email, String phoneNumber, Date birthDate, String sex, double weightInPounds, double heightInInches){
         try{
             Statement statement = connect.createStatement();
+            String query = String.format("update patients set name = '%s', phone_num = '%s', birthDate = DATE '%s', sex = '%s', weight = %f, height = %f where patient_id = %d;", name, phoneNumber, birthDate, sex, weightInPounds, heightInInches, userID);
+            statement.executeQuery(query);
+            return true;
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return false;
+    }
 
+    public int getPatientID(String email){
+        try{
+            Statement statement = connect.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("select patient_id from patients where email = '%s';", email));
             if(resultSet.next()) {
                 return resultSet.getInt("patient_id");
@@ -80,7 +96,19 @@ public class dbIntegration {
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
-
         return -1;
+    }
+
+    boolean isPatient(String login){
+        try{
+            Statement statement = connect.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format("select * from logins where login = '%s';", login));
+            if(resultSet.next()) {
+                return (resultSet.getInt("patient_id") == 0)? false: true;
+            }
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return false;
     }
 }

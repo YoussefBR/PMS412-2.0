@@ -7,8 +7,8 @@ public class Caregiver extends User {
     private String department;
     private List<Patient> patients;
 
-    public Caregiver(String name, String email, String phoneNumber, String department, List<Patient> patients) {
-        super(name, email, phoneNumber);
+    public Caregiver(int userID, String name, String email, String phoneNumber, String department, List<Patient> patients) {
+        super(userID, name, email, phoneNumber);
         this.department = department;
         this.patients = patients;
     }

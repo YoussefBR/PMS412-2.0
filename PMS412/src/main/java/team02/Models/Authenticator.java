@@ -17,39 +17,39 @@ public class Authenticator {
     /**
      * Looks up the employee login information and returns whether authentication was successful or not.
      * 
-     * @param employee_id the employee's user login
+     * @param employeeId the employee's user login
      * @param password the employee's password
      * @return a boolean representing whether authentication passes
      */
-    public boolean AuthenticateEmployee(String employee_id, String password){
+    public boolean AuthenticateEmployee(String employeeId, String password){
         // Implementation details... 
         dbIntegration db = dbIntegration.getInstance();
-        return db.checkLogin(employee_id, password);
+        return db.checkLogin(employeeId, password);
     }
     
     /**
      * Looks up the patient login information and returns whether authentication was successful or not.
      * 
-     * @param patient_id the patient's user login
+     * @param patientId the patient's user login
      * @param dob the patient's date of birth
      * @param password the patient's password
      * @return a boolean representing whether authentication passes
      */
-    public boolean AuthenticatePatient(String patient_id, String password){
+    public boolean AuthenticatePatient(String patientId, String password){
         // Implementation details... 
         dbIntegration db = dbIntegration.getInstance();
-        return db.checkLogin(patient_id, password); 
+        return db.checkLogin(patientId, password); 
     }
 
     /**
      * Changes an employee password if authentication passes
      * 
-     * @param employee_id the employee's user login
-     * @param old_password the employee's old password
-     * @param new_password the employee's new requested password
+     * @param employeeId the employee's user login
+     * @param oldPassword the employee's old password
+     * @param newPassword the employee's new requested password
      * @return a boolean representing whether authentication passes
      */
-    public Boolean changeEmployeePassword(String employee_id, String old_password, String new_password){
+    public Boolean changeEmployeePassword(String employeeId, String oldPassword, String newPassword){
         // Implementation details... 
         return true;
     }
@@ -57,13 +57,13 @@ public class Authenticator {
     /**
      * Changes the patient's password if authentication passes
      * 
-     * @param patient_id the patient's user login
+     * @param patientId the patient's user login
      * @param dob the patient's date of birth
-     * @param old_password the patient's old password
-     * @param new_password the patient's new requested password
+     * @param oldPassword the patient's old password
+     * @param newPassword the patient's new requested password
      * @return a boolean representing whether authentication passes
      */
-    public Boolean changePatientPassword(String patient_id, String old_password, String new_password){
+    public Boolean changePatientPassword(String patientId, String oldPassword, String newPassword){
         // Implementation details... 
         return true;
     }
@@ -71,37 +71,37 @@ public class Authenticator {
     /**
      * Adds a new employee to the dictionary
      * 
-     * @param employee_id the employee's user login
+     * @param employeeId the employee's user login
      * @param password the employee's password
      * @return a boolean representing whether authentication passes
      */
-    public Boolean addNewEmployee(String employee_id, String password){
+    public Boolean addNewEmployee(String employeeId, String password){
         // Implementation details... 
         dbIntegration db = dbIntegration.getInstance();
-        return db.addLogin(employee_id, password);
+        return db.addLogin(employeeId, password);
     }
 
     /**
      * Adds a new patient to the dictionary
      * 
-     * @param patient_id the patient's user login
+     * @param patientId the patient's user login
      * @param dob the patient's date of birth
      * @param password the patient's password
      * @return a boolean representing whether authentication passes
      */
-    public Boolean addNewPatient(String patient_id, String password){
+    public Boolean addNewPatient(String patientId, String password){
         // Implementation details... 
         dbIntegration db = dbIntegration.getInstance();
-        return db.addLogin(patient_id, password);
+        return db.addLogin(patientId, password);
     }  
 
     /**
      * Checks if an employee exists in the dictionary
      * 
-     * @param employee_id the employee's user login
+     * @param employeeId the employee's user login
      * @return a boolean representing whether the employee exists or not
      */
-    public Boolean employeeExists(String employee_id){
+    public Boolean employeeExists(String employeeId){
         //Implementation details...
         return true;
     }
@@ -109,10 +109,10 @@ public class Authenticator {
     /**
      * Checks if a patient exists or not
      * 
-     * @param patient_id the patients user login
+     * @param patientId the patients user login
      * @return a boolean representing whether the patient exists or not
      */
-    public Boolean patientExists(String patient_id){
+    public Boolean patientExists(String patientId){
         //Implementation details...
         return true;
     }
