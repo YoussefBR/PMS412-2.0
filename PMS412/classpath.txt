@@ -1,0 +1,1 @@
+/Users/youssefbr/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/youssefbr/.m2/repository/mysql/mysql-connector-java/8.0.28/mysql-connector-java-8.0.28.jar:/Users/youssefbr/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar
