@@ -1,4 +1,4 @@
-package Views;
+package team02.Views;
 
 import javax.swing.*;
 import java.awt.*;

@@ -99,7 +99,7 @@ public class dbIntegration {
         return -1;
     }
 
-    boolean isPatient(String login){
+    public boolean isPatient(String login){
         try{
             Statement statement = connect.createStatement();
             ResultSet resultSet = statement.executeQuery(String.format("select * from logins where login = '%s';", login));

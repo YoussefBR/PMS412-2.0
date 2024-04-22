@@ -14,6 +14,12 @@ public class Authenticator {
         return instance;
     }
 
+    public boolean Authenticate(String login, String password){
+        // Implementation details... 
+        dbIntegration db = dbIntegration.getInstance();
+        return db.checkLogin(login, password);
+    }
+
     /**
      * Looks up the employee login information and returns whether authentication was successful or not.
      * 
