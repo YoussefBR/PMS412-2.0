@@ -1,17 +1,14 @@
 team02/Models/UserManagement.class
 team02/Views/CaregiverInfoView.class
 team02/Controllers/PatientInfoController.class
-team02/Views/SearchPatientView.class
 team02/Views/CreatePatientView.class
 team02/Models/dbIntegration.class
 team02/Models/Medication.class
 team02/Views/LoginView.class
 team02/Models/Record.class
-team02/Controllers/CaregiverInfoController.class
 team02/Models/Caregiver.class
 team02/Models/User.class
 team02/Views/PatientInfoView.class
-Views/SearchPatientView.class
 team02/Models/Patient.class
 team02/Models/Authenticator.class
 team02/Controllers/LoginController.class

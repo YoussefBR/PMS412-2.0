@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class CaregiverHomeScreen extends JFrame {
+
     private JButton createPatientButton;
     private JButton searchPatientButton;
+    private JButton logoutButton;
 
     public CaregiverHomeScreen() {
         super("Home Screen");
@@ -16,14 +18,16 @@ public class CaregiverHomeScreen extends JFrame {
 
         createPatientButton = new JButton("Create Patient");
         searchPatientButton = new JButton("Search Patient");
+        logoutButton = new JButton("Logout");
 
         JPanel panel = new JPanel(new GridBagLayout()); // Set the layout to GridBagLayout
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER; // This line instructs the layout manager that components are the last in their row (centered).
         gbc.anchor = GridBagConstraints.CENTER; // This anchors all components to the center.
 
-        panel.add(createPatientButton, gbc); // Add the button with constraints
-        panel.add(searchPatientButton, gbc); // Add the button with constraints
+        panel.add(createPatientButton, gbc);
+        panel.add(searchPatientButton, gbc);
+        panel.add(logoutButton, gbc);
 
         add(panel);
 
@@ -36,6 +40,10 @@ public class CaregiverHomeScreen extends JFrame {
 
     public void addSearchPatientButtonListener(ActionListener listener) {
         searchPatientButton.addActionListener(listener);
+    }
+
+    public void addLogoutButtonListener(ActionListener listener) {
+        logoutButton.addActionListener(listener);
     }
 }
 

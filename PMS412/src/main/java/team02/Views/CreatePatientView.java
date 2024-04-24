@@ -1,6 +1,12 @@
 package team02.Views;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
+
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -27,7 +33,7 @@ public class CreatePatientView extends JFrame {
 
     public CreatePatientView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 600); // Set initial size
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setTitle("Caregiver Information"); // Set title for the frame
         initComponents();
     }
@@ -39,10 +45,10 @@ public class CreatePatientView extends JFrame {
         nameField = new JTextField();
         emailField = new JTextField();
         phonenumberField = new JTextField();
-        birthDateField = new JTextField();
+        birthDateField = createFormattedDateField();
         sexField = new JTextField();
-        weightField = new JTextField();
-        heightField = new JTextField();
+        weightField = createFormattedNumberField(10);
+        heightField = createFormattedNumberField(10);
         backToHomescreenButton = new JButton("Back to Home Screen");
         saveButton = new JButton("Save");
 
@@ -73,5 +79,61 @@ public class CreatePatientView extends JFrame {
 
     public void addBackButtonListener(ActionListener listener) {
         backToHomescreenButton.addActionListener(listener);
+    }
+
+    public void addSaveButtonListener(ActionListener listener) {
+        saveButton.addActionListener(listener);
+    }
+
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
+    public JTextField getPhoneNumberField() {
+        return phonenumberField;
+    }
+
+    public JTextField getBirthDateField() {
+        return birthDateField;
+    }
+
+    public JTextField getSexField(){
+        return sexField;
+    }
+
+    public JTextField getWeightField() {
+        return weightField;
+    }
+
+    public JTextField getHeightField() {
+        return heightField;
+    }
+
+    private JFormattedTextField createFormattedDateField() {
+        try {
+            MaskFormatter dateFormatter = new MaskFormatter("####-##-##");
+            dateFormatter.setPlaceholderCharacter('_');
+            JFormattedTextField dateField = new JFormattedTextField(dateFormatter);
+            dateField.setColumns(10); // Set the size similar to other fields
+            return dateField;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private JFormattedTextField createFormattedNumberField(int columns) {
+        NumberFormat format = NumberFormat.getInstance();
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(0);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        JFormattedTextField numberField = new JFormattedTextField(formatter);
+        numberField.setColumns(columns); // Set fixed size
+        return numberField;
     }
 }

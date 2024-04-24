@@ -3,6 +3,9 @@ package team02.Views;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+
+import team02.Models.Patient;
+
 import java.awt.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -13,35 +16,36 @@ public class PatientInfoView extends JFrame {
     private JTextField sexField;
     private JFormattedTextField heightField, weightField;
     private JButton saveButton;
+    private JButton backButton;
     private JTabbedPane tabbedPane;
+    private Patient patient;
+    private boolean isEmployee;
 
-    public PatientInfoView(boolean isEmployee) {
+    public PatientInfoView(boolean isEmployee, Patient patient) {
         // Setup the main window
         setTitle("Patient Information");
+        this.isEmployee = isEmployee;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);  // Removes the window borders and title bar
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        
+        this.patient = patient;
 
-        // Create the tabbed pane
         tabbedPane = new JTabbedPane();
-
-        // Contact Info Panel using GridBagLayout
         JPanel contactPanel = setupContactPanel(isEmployee);
-
-        // Personal Info Panel using GridBagLayout
         JPanel personalPanel = setupPersonalPanel(isEmployee);
 
-        // Add the tabbed pane to the main window
         tabbedPane.addTab("Contact Info", contactPanel);
         tabbedPane.addTab("Personal Info", personalPanel);
         add(tabbedPane, BorderLayout.CENTER);
 
-        // Save Button
         saveButton = new JButton("Save");
-        add(saveButton, BorderLayout.SOUTH);
+        backButton = new JButton("Back to Home Screen");
 
-        // Pack and set visible
+        add(saveButton, BorderLayout.SOUTH);
+        add(backButton, BorderLayout.SOUTH);
+
         pack();
         setVisible(true);
     }
@@ -57,20 +61,21 @@ public class PatientInfoView extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
 
         panel.add(new JLabel("Name:"), gbc);
-        nameField = new JTextField(10);
-        nameField.setEditable(isEmployee);
+        nameField = new JTextField(patient.getName(), 10);
+        nameField.setEditable(true);
         gbc.gridx = 1;
         panel.add(nameField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Email:"), gbc);
-        emailField = new JTextField(10);
+        emailField = new JTextField(patient.getEmail(), 10);
+        emailField.setEditable(true);
         gbc.gridx = 1;
         panel.add(emailField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Phone Number:"), gbc);
-        phoneField = new JTextField(10);
+        phoneField = new JTextField(patient.getPhoneNumber(), 10);
         gbc.gridx = 1;
         panel.add(phoneField, gbc);
 
@@ -85,37 +90,39 @@ public class PatientInfoView extends JFrame {
 
         gbc.gridx = 0;
         panel.add(new JLabel("Birthday:"), gbc);
-        birthdayField = createFormattedDateField(isEmployee);
+        birthdayField = createFormattedDateField(patient.getBirthDate().toString(), isEmployee);
         gbc.gridx = 1;
         panel.add(birthdayField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Sex:"), gbc);
-        sexField = new JTextField(10);
+        sexField = new JTextField(patient.getSex(), 10);
         sexField.setEditable(isEmployee);
         gbc.gridx = 1;
         panel.add(sexField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Height (cm):"), gbc);
-        heightField = createFormattedNumberField(isEmployee, 10);
+        heightField = createFormattedNumberField(patient.getheightInInches(), isEmployee, 10);
         gbc.gridx = 1;
         panel.add(heightField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Weight (kg):"), gbc);
-        weightField = createFormattedNumberField(isEmployee, 10);
+        String num2 = "" + patient.getWeightInPounds();
+        weightField = createFormattedNumberField(patient.getWeightInPounds(), isEmployee, 10);
         gbc.gridx = 1;
         panel.add(weightField, gbc);
 
         return panel;
     }
 
-    private JFormattedTextField createFormattedDateField(boolean isEditable) {
+    private JFormattedTextField createFormattedDateField(String defaultDate, boolean isEditable) {
         try {
             MaskFormatter dateFormatter = new MaskFormatter("####-##-##");
             dateFormatter.setPlaceholderCharacter('_');
             JFormattedTextField dateField = new JFormattedTextField(dateFormatter);
+            dateField.setValue(defaultDate);
             dateField.setEditable(isEditable);
             dateField.setColumns(10); // Set the size similar to other fields
             return dateField;
@@ -125,13 +132,14 @@ public class PatientInfoView extends JFrame {
         }
     }
 
-    private JFormattedTextField createFormattedNumberField(boolean isEditable, int columns) {
+    private JFormattedTextField createFormattedNumberField(double defaultNum, boolean isEditable, int columns) {
         NumberFormat format = NumberFormat.getInstance();
         NumberFormatter formatter = new NumberFormatter(format);
-        formatter.setValueClass(Integer.class);
+        formatter.setValueClass(Double.class);
         formatter.setMinimum(0);
-        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setMaximum(Double.MAX_VALUE);
         JFormattedTextField numberField = new JFormattedTextField(formatter);
+        numberField.setValue(defaultNum);
         numberField.setEditable(isEditable);
         numberField.setColumns(columns); // Set fixed size
         return numberField;
@@ -146,4 +154,7 @@ public class PatientInfoView extends JFrame {
     public JFormattedTextField getHeightField() { return heightField; }
     public JFormattedTextField getWeightField() { return weightField; }
     public JButton getSaveButton() { return saveButton; }
+    public JButton getBackButton() { return backButton; }
+    public Patient getPatient(){ return patient; }
+    public boolean getIsEmployee(){ return isEmployee; }
 }
