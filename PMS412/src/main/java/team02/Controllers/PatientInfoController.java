@@ -22,10 +22,10 @@ public class PatientInfoController {
         String name = view.getNameField().getText();
         String email = view.getEmailField().getText();
         String phone = view.getPhoneField().getText();
-        // String birthday = view.getBirthdayField().getText();
-        // String sex = view.getSexField().getText();
-        // double height = Double.parseDouble(view.getHeightField().getText());
-        // double weight = Double.parseDouble(view.getWeightField().getText());
+        String birthday = view.getBirthdayField().getText();
+        String sex = view.getSexField().getText();
+        double height = Double.parseDouble(view.getHeightField().getText());
+        double weight = Double.parseDouble(view.getWeightField().getText());
         
         // System.out.println("Name: " + name);
         // System.out.println("Email: " + email);
@@ -39,9 +39,14 @@ public class PatientInfoController {
         Patient patient = view.getPatient();
         patient.setName(name);
         patient.setEmail(email);
+        patient.setBirthDate(Date.valueOf(birthday).toLocalDate());
+        patient.setSex(sex);
+        patient.setWeightInPounds(weight);
+        patient.setheightInInches(height);
 
         dbIntegration db = dbIntegration.getInstance();
-        boolean successful = db.updatePatient(patient.getUserID(), name, email, phone);
+        System.out.println(view.getIsEmployee());
+        boolean successful = (!view.getIsEmployee())? db.updatePatient(patient.getUserID(), name, email, phone): db.updatePatient(patient.getUserID(), name, email, phone, Date.valueOf(birthday), sex, weight, height);
 
         String message = successful? "Data saved successfully!": "Error: Data not saved!";
 

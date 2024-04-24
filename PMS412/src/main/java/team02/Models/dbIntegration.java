@@ -4,6 +4,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class dbIntegration {
 
@@ -147,5 +148,20 @@ public class dbIntegration {
             System.out.println("Error: " + e.getMessage());
         }
         return null;
+    }
+
+    public ArrayList<Patient> getPatients(){
+        ArrayList<Patient> patients = new ArrayList<Patient>();
+        try{
+            Statement statement = connect.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from patients;");
+            while(resultSet.next()) {
+                Patient patient =  new Patient(resultSet.getInt("patient_id"), resultSet.getString("name"), resultSet.getString("email"), resultSet.getString("phone_num"), resultSet.getDate("birthDate").toLocalDate(), resultSet.getString("sex"), resultSet.getDouble("weight"), resultSet.getDouble("height"));
+                patients.add(patient);
+            }
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return patients;
     }
 }

@@ -44,7 +44,7 @@ public class PatientInfoView extends JFrame {
         backButton = new JButton("Back to Home Screen");
 
         add(saveButton, BorderLayout.SOUTH);
-        add(backButton, BorderLayout.SOUTH);
+        add(backButton, BorderLayout.NORTH);
 
         pack();
         setVisible(true);
@@ -109,7 +109,6 @@ public class PatientInfoView extends JFrame {
 
         gbc.gridx = 0;
         panel.add(new JLabel("Weight (kg):"), gbc);
-        String num2 = "" + patient.getWeightInPounds();
         weightField = createFormattedNumberField(patient.getWeightInPounds(), isEmployee, 10);
         gbc.gridx = 1;
         panel.add(weightField, gbc);

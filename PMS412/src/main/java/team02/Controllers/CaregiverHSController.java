@@ -1,8 +1,12 @@
 package team02.Controllers;
 
+import team02.Models.dbIntegration;
 import team02.Views.CaregiverHomeScreen;
+import team02.Views.SearchPatientView;
 import team02.Views.CreatePatientView;
+import team02.Models.Patient;
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class CaregiverHSController {
     private CaregiverHomeScreen view;
@@ -29,7 +33,12 @@ public class CaregiverHSController {
 
     private void onSearchPatient() {
         // Redirect to Search Patient Page
-        
+        dbIntegration db = dbIntegration.getInstance();
+        ArrayList<Patient> patients = db.getPatients();
+        SwingUtilities.invokeLater(() -> {
+            SearchPatientView searchPatientView = new SearchPatientView(patients);
+            new SearchPatientController(searchPatientView);
+        });
     }
 
     private void onLogout(){

@@ -1,70 +1,109 @@
 package team02.Views;
 
- import javax.swing.*;
- import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.ArrayList;
 
- public class SearchPatientView extends JFrame {
-     private JTable table1;
-     private JPanel panel1;
-     private JButton viewPatientButton;
-     private JButton assignPatientButton;
-     private JButton backButton;
-     private JButton logoutButton;
+import team02.Models.Patient;
 
-     public SearchPatientView() {
-         super("Search Patient"); // Set title
-         initComponents();
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         setSize(400, 300); // Set initial size larger to accommodate components
-         setLocationRelativeTo(null); // Center on screen
-         setVisible(true); // It's often better to set visibility outside the constructor
-     }
+public class SearchPatientView extends JFrame {
+    private JTable table;
+    private JPanel panel;
+    private JButton viewPatientButton;
+    private JButton assignPatientButton;
+    private JButton backButton;
+    private JButton logoutButton;
+    private JTextField searchField;
+    private JButton searchButton;
+    private ArrayList<Patient> patients;
 
-     private void initComponents() {
-         panel1 = new JPanel(new GridLayout(0, 1, 10, 10)); // GridLayout with spacing
+    public SearchPatientView(ArrayList<Patient> patients) {
+        super("Search Patient");
+        this.patients = patients;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        initComponents();
+        setVisible(true);
+    }
 
-         // Initialize buttons
-         viewPatientButton = new JButton("View Patient");
-         assignPatientButton = new JButton("Assign Patient");
-         backButton = new JButton("Back");
-         logoutButton = new JButton("Logout");
+    private void initComponents() {
+        panel = new JPanel();
+        panel.setLayout(new BorderLayout());
 
-         // Table setup
-         String[] columns = {"Column 1", "Column 2"};
-         Object[][] data = {{"Data 1", "Data 2"}, {"Data 3", "Data 4"}};
-         table1 = new JTable(data, columns);
-         JScrollPane scrollPane = new JScrollPane(table1);
-         scrollPane.setPreferredSize(new Dimension(380, 150)); // Set preferred size for scroll pane
+        // Initialize buttons and search field
+        viewPatientButton = new JButton("View Patient");
+        assignPatientButton = new JButton("Assign Patient");
+        backButton = new JButton("Back");
+        logoutButton = new JButton("Logout");
+        searchField = new JTextField(20);
+        searchButton = new JButton("Search");
 
-         // Adding components to the panel
-         panel1.add(scrollPane); // Add the scroll pane containing the table
-         panel1.add(viewPatientButton);
-         panel1.add(assignPatientButton);
-         panel1.add(backButton);
-         panel1.add(logoutButton);
+        // Panel for search bar and buttons
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        topPanel.add(new JLabel("Search:"));
+        topPanel.add(searchField);
+        topPanel.add(searchButton);
 
-         // Add panel to frame
-         add(panel1, BorderLayout.CENTER); // Add panel to the center of the frame layout
-     }
+        // Table setup
+        String[] columns = {"Name", "Email", "Date of Birth"};
+        Object[][] data = new Object[patients.size()][3];
+        for (int i = 0; i < patients.size(); i++) {
+            data[i][0] = patients.get(i).getName();
+            data[i][1] = patients.get(i).getEmail();
+            data[i][2] = patients.get(i).getBirthDate();
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+        table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(580, 200)); // Adjusted for new frame size
 
-     // Getters for controller to access the buttons
-     public JButton getViewPatientButton() {
-         return viewPatientButton;
-     }
+        // Bottom panel for buttons
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(viewPatientButton);
+        bottomPanel.add(assignPatientButton);
+        bottomPanel.add(backButton);
+        bottomPanel.add(logoutButton);
 
-     public JButton getAssignPatientButton() {
-         return assignPatientButton;
-     }
+        // Adding components to the main panel
+        panel.add(topPanel, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(bottomPanel, BorderLayout.SOUTH);
 
-     public JButton getBackButton() {
-         return backButton;
-     }
+        // Add the main panel to the frame
+        add(panel);
+    }
 
-     public JButton getLogoutButton() {
-         return logoutButton;
-     }
+    // Getters for controllers to access components
+    public JButton getViewPatientButton() {
+        return viewPatientButton;
+    }
 
-     public JFrame getFrame() {
-         return this;
-     }
+    public JButton getAssignPatientButton() {
+        return assignPatientButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    public JTextField getSearchField() {
+        return searchField;
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+    public JTable getTable(){
+        return table;
+    }
+    public ArrayList<Patient> getPatients(){
+        return patients;
+    }   
 }
