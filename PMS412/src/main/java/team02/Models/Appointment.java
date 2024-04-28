@@ -1,4 +1,4 @@
-package Model;
+package team02.Models;
 
 import java.time.LocalDateTime;
 

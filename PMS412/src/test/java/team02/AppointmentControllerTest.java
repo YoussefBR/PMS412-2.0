@@ -1,6 +1,6 @@
-package Test;
+package team02;
 
-import Controller.AppointmentController;
+import team02.Controllers.AppointmentController;
 import java.time.LocalDateTime;
 import java.util.List;
 
