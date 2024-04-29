@@ -51,7 +51,6 @@ public class PatientInfoController {
                         height);
 
         String message = successful ? "Data saved successfully!" : "Error: Data not saved!";
-
         JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 

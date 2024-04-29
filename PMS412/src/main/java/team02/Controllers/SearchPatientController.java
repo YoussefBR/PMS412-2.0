@@ -47,7 +47,6 @@ public class SearchPatientController {
     }
 
     private void viewPatientDetails() {
-        System.out.println("Viewing patient details.");
         // Implementation for viewing selected patient details
         int row = view.getTable().getSelectedRow();
         if (row == -1) {
@@ -79,7 +78,6 @@ public class SearchPatientController {
     }
 
     private void goBack() {
-        System.out.println("Going back to previous view.");
         view.dispose();
     }
 

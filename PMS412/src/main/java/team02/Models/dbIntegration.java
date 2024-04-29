@@ -38,7 +38,7 @@ public class dbIntegration {
             if (resultSet.next()) {
                 String pwd = resultSet.getString("password");
                 if (pwd.equals(password)) {
-                    System.out.println("Login successful");
+                    System.out.println("User " + login + " logged in successfully.");
                     return true;
                 }
             }
