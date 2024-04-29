@@ -11,7 +11,8 @@ public class AppointmentController {
         this.appointments = new ArrayList<>();
     }
 
-    public void scheduleAppointment(int appointmentId, int doctorId, int patientId, LocalDateTime dateTime) throws Exception {
+    public void scheduleAppointment(int appointmentId, int doctorId, int patientId, LocalDateTime dateTime)
+            throws Exception {
         if (dateTime.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Appointment time must be in the future.");
         }

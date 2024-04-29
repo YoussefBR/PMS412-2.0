@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class CreatePatientView extends JFrame {
+
     private JPanel panel1;
     private JTextField nameField;
     private JTextField emailField;
@@ -20,16 +21,7 @@ public class CreatePatientView extends JFrame {
     private JTextField weightField;
     private JTextField heightField;
     private JButton backToHomescreenButton;
-
     private JButton saveButton;
-    private JLabel firstAndLastNameLabel;
-    private JLabel emailLabel;
-    private JLabel phoneNumberLabel;
-    private JLabel birthDateLabel;
-    private JLabel sexLabel;
-    private JLabel weightIbLabel;
-    private JLabel heightInLabel;
-
 
     public CreatePatientView() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,7 +93,7 @@ public class CreatePatientView extends JFrame {
         return birthDateField;
     }
 
-    public JTextField getSexField(){
+    public JTextField getSexField() {
         return sexField;
     }
 

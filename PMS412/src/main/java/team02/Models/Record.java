@@ -17,7 +17,7 @@ public class Record {
         this.notes = notes;
     }
 
-    public Record(String healthcareProvider, String dateOfService, String typeOfService){
+    public Record(String healthcareProvider, String dateOfService, String typeOfService) {
         this.healthcareProvider = healthcareProvider;
         this.dateOfService = dateOfService;
         this.typeOfService = typeOfService;
@@ -25,7 +25,6 @@ public class Record {
     }
 
     // Getters and Setters
-
     public String getHealthcareProvider() {
         return healthcareProvider;
     }

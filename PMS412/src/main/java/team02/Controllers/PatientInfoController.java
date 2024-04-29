@@ -26,7 +26,7 @@ public class PatientInfoController {
         String sex = view.getSexField().getText();
         double height = Double.parseDouble(view.getHeightField().getText());
         double weight = Double.parseDouble(view.getWeightField().getText());
-        
+
         // System.out.println("Name: " + name);
         // System.out.println("Email: " + email);
         // System.out.println("Phone: " + phone);
@@ -46,15 +46,17 @@ public class PatientInfoController {
 
         dbIntegration db = dbIntegration.getInstance();
         System.out.println(view.getIsEmployee());
-        boolean successful = (!view.getIsEmployee())? db.updatePatient(patient.getUserID(), name, email, phone): db.updatePatient(patient.getUserID(), name, email, phone, Date.valueOf(birthday), sex, weight, height);
+        boolean successful = (!view.getIsEmployee()) ? db.updatePatient(patient.getUserID(), name, email, phone)
+                : db.updatePatient(patient.getUserID(), name, email, phone, Date.valueOf(birthday), sex, weight,
+                        height);
 
-        String message = successful? "Data saved successfully!": "Error: Data not saved!";
+        String message = successful ? "Data saved successfully!" : "Error: Data not saved!";
 
         JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void goBack(){
-        if(view.getIsEmployee()){
+    private void goBack() {
+        if (view.getIsEmployee()) {
             view.dispose();
         }
         view.dispose();

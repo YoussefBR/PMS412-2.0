@@ -3,23 +3,20 @@ package team02.Controllers;
 import team02.Views.SearchPatientView;
 import team02.Views.PatientInfoView;
 import team02.Models.Patient;
+import team02.Models.dbIntegration;
+import team02.Models.Doctor;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchPatientController {
+
     private SearchPatientView view;
 
     public SearchPatientController(SearchPatientView view) {
         this.view = view;
-        initView();
         initController();
-    }
-
-    private void initView() {
-        // Initial setup or data loading operations if needed
     }
 
     private void initController() {
@@ -28,7 +25,7 @@ public class SearchPatientController {
         view.getViewPatientButton().addActionListener(e -> viewPatientDetails());
         view.getAssignPatientButton().addActionListener(e -> assignPatient());
         view.getBackButton().addActionListener(e -> goBack());
-        view.getLogoutButton().addActionListener(e -> logout());
+        view.getSelectDoctorButton().addActionListener(e -> assignDoctor());
     }
 
     private void performSearch() {
@@ -36,7 +33,8 @@ public class SearchPatientController {
         // Perform search based on searchText
         // Example: Filter/search in the table's model
         System.out.println("Search for: " + searchText);
-        // Here you would typically interact with a model or database to get the search results
+        // Here you would typically interact with a model or database to get the search
+        // results
         // For now, let's just simulate a search
         simulateSearch(searchText);
     }
@@ -45,7 +43,7 @@ public class SearchPatientController {
         // Assuming a DefaultTableModel and setting the model based on search results
         DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
         model.setRowCount(0); // Clear previous results
-        model.addRow(new Object[]{"3", "Alice Johnson", "32", "Healthy"}); // Simulated result
+        model.addRow(new Object[] { "3", "Alice Johnson", "32", "Healthy" }); // Simulated result
     }
 
     private void viewPatientDetails() {
@@ -53,7 +51,8 @@ public class SearchPatientController {
         // Implementation for viewing selected patient details
         int row = view.getTable().getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(view, "Please select a patient to view details.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Please select a patient to view details.", "Information",
+                    JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         ArrayList<Patient> patients = view.getPatients();
@@ -65,8 +64,18 @@ public class SearchPatientController {
     }
 
     private void assignPatient() {
-        System.out.println("Assigning patient.");
-        // Implementation for assigning the selected patient
+        if (view.getRole().equals("admin")) {
+            int row = view.getTable().getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(view, "Please select a patient to view details.", "Information",
+                        JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            view.showDoctorAssignmentDialog();
+        } else {
+            JOptionPane.showMessageDialog(view, String.format("%ss cannot assign patients.", view.getRole()),
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void goBack() {
@@ -74,9 +83,25 @@ public class SearchPatientController {
         view.dispose();
     }
 
-    private void logout() {
-        System.out.println("Logging out.");
-        // Implementation for logging out
+    private void assignDoctor() {
+        // Get selected doctor
+        int selectedIndex = view.getDoctorList().getSelectedIndex();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(view, "Please select a doctor to assign.", "Information",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Doctor selectedDoctor = view.getDoctors().get(selectedIndex);
+
+        // Get selected patient
+        int row = view.getTable().getSelectedRow();
+        assert (row != -1);
+        Patient selectedPatient = view.getPatients().get(row);
+
+        // Assign patient to doctor
+        dbIntegration.getInstance().assignPatient(selectedPatient.getUserID(), selectedDoctor.getUserID());
+
+        view.disposeDoctorAssignment();
     }
 
 }

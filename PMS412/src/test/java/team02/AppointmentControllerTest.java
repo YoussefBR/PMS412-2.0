@@ -23,7 +23,8 @@ public class AppointmentControllerTest {
         LocalDateTime newDateTime = initialTime.plusDays(1); // Ensure the rescheduled time is valid
         controller.scheduleAppointment(2, 102, 202, initialTime);
         controller.rescheduleAppointment(2, newDateTime);
-        assertEquals("The rescheduled time should match the new date/time", newDateTime, controller.getAppointments().get(0).getDateTime());
+        assertEquals("The rescheduled time should match the new date/time", newDateTime,
+                controller.getAppointments().get(0).getDateTime());
     }
 
     @Test

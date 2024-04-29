@@ -6,6 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import team02.Models.Patient;
+import team02.Models.Doctor;
+import team02.Models.dbIntegration;
 
 public class SearchPatientView extends JFrame {
     private JTable table;
@@ -13,14 +15,20 @@ public class SearchPatientView extends JFrame {
     private JButton viewPatientButton;
     private JButton assignPatientButton;
     private JButton backButton;
-    private JButton logoutButton;
     private JTextField searchField;
     private JButton searchButton;
-    private ArrayList<Patient> patients;
+    private JDialog assignDoctor;
+    private JButton selectDoctorButton;
+    private JList<String> doctorList;
 
-    public SearchPatientView(ArrayList<Patient> patients) {
+    private ArrayList<Patient> patients;
+    private ArrayList<Doctor> doctors;
+    private String role;
+
+    public SearchPatientView(ArrayList<Patient> patients, String role) {
         super("Search Patient");
         this.patients = patients;
+        this.role = role;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -36,9 +44,11 @@ public class SearchPatientView extends JFrame {
         viewPatientButton = new JButton("View Patient");
         assignPatientButton = new JButton("Assign Patient");
         backButton = new JButton("Back");
-        logoutButton = new JButton("Logout");
         searchField = new JTextField(20);
         searchButton = new JButton("Search");
+
+        // Initialize doctor assignment dialog
+        initDoctorAssignmentDialog();
 
         // Panel for search bar and buttons
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -47,7 +57,7 @@ public class SearchPatientView extends JFrame {
         topPanel.add(searchButton);
 
         // Table setup
-        String[] columns = {"Name", "Email", "Date of Birth"};
+        String[] columns = { "Name", "Email", "Date of Birth" };
         Object[][] data = new Object[patients.size()][3];
         for (int i = 0; i < patients.size(); i++) {
             data[i][0] = patients.get(i).getName();
@@ -63,9 +73,9 @@ public class SearchPatientView extends JFrame {
         // Bottom panel for buttons
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.add(viewPatientButton);
-        bottomPanel.add(assignPatientButton);
+        if (role.equals("admin"))
+            bottomPanel.add(assignPatientButton);
         bottomPanel.add(backButton);
-        bottomPanel.add(logoutButton);
 
         // Adding components to the main panel
         panel.add(topPanel, BorderLayout.NORTH);
@@ -89,10 +99,6 @@ public class SearchPatientView extends JFrame {
         return backButton;
     }
 
-    public JButton getLogoutButton() {
-        return logoutButton;
-    }
-
     public JTextField getSearchField() {
         return searchField;
     }
@@ -100,10 +106,57 @@ public class SearchPatientView extends JFrame {
     public JButton getSearchButton() {
         return searchButton;
     }
-    public JTable getTable(){
+
+    public JTable getTable() {
         return table;
     }
-    public ArrayList<Patient> getPatients(){
+
+    public ArrayList<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public ArrayList<Patient> getPatients() {
         return patients;
-    }   
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public JButton getSelectDoctorButton() {
+        return selectDoctorButton;
+    }
+
+    public JList<String> getDoctorList() {
+        return doctorList;
+    }
+
+    private void initDoctorAssignmentDialog() {
+        assignDoctor = new JDialog(this, "Assign Doctor", true);
+        assignDoctor.setLayout(new BorderLayout());
+        assignDoctor.setSize(300, 200);
+        assignDoctor.setLocationRelativeTo(this);
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        doctors = dbIntegration.getInstance().getDoctors();
+        doctors.forEach(doctor -> model
+                .addElement(doctor.getName() + " - " + doctor.getDepartment() + ", " + doctor.getSpecialty()));
+
+        doctorList = new JList<>(model);
+        JScrollPane scrollPane = new JScrollPane(doctorList);
+        assignDoctor.add(scrollPane, BorderLayout.CENTER);
+
+        selectDoctorButton = new JButton("Assign");
+        assignDoctor.add(selectDoctorButton, BorderLayout.SOUTH);
+
+        assignDoctor.setVisible(false);
+    }
+
+    public void showDoctorAssignmentDialog() {
+        assignDoctor.setVisible(true);
+    }
+
+    public void disposeDoctorAssignment() {
+        assignDoctor.dispose();
+    }
 }

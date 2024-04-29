@@ -20,6 +20,7 @@ public class CaregiverHSController {
         view.addCreatePatientButtonListener(e -> onCreatePatient());
         view.addSearchPatientButtonListener(e -> onSearchPatient());
         view.addLogoutButtonListener(e -> onLogout());
+        view.addMyPatientsButtonListener(e -> onMyPatients());
     }
 
     private void onCreatePatient() {
@@ -28,7 +29,7 @@ public class CaregiverHSController {
             CreatePatientView createPatientView = new CreatePatientView();
             new CreatePatientController(createPatientView);
         });
-        
+
     }
 
     private void onSearchPatient() {
@@ -36,12 +37,22 @@ public class CaregiverHSController {
         dbIntegration db = dbIntegration.getInstance();
         ArrayList<Patient> patients = db.getPatients();
         SwingUtilities.invokeLater(() -> {
-            SearchPatientView searchPatientView = new SearchPatientView(patients);
+            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getRole());
             new SearchPatientController(searchPatientView);
         });
     }
 
-    private void onLogout(){
+    private void onMyPatients() {
+        // Fill search patient screen with doctor's specific patients
+        dbIntegration db = dbIntegration.getInstance();
+        ArrayList<Patient> patients = db.getPatientsByDoctor(view.getId());
+        SwingUtilities.invokeLater(() -> {
+            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getRole());
+            new SearchPatientController(searchPatientView);
+        });
+    }
+
+    private void onLogout() {
         view.dispose();
     }
 }

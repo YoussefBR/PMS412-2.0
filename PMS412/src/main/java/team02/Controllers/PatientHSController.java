@@ -1,7 +1,6 @@
 package team02.Controllers;
 
 import team02.Models.dbIntegration;
-import team02.Views.CaregiverHomeScreen;
 import team02.Views.PatientHomeScreen;
 import team02.Views.PatientInfoView;
 import team02.Models.Patient;
@@ -31,7 +30,7 @@ public class PatientHSController {
         });
     }
 
-    private void onLogout(){
+    private void onLogout() {
         view.dispose();
     }
 }

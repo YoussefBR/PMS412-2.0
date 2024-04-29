@@ -13,8 +13,8 @@ public class Medication {
     private String notes;
 
     public Medication(String name, double dosage, String frequency, String prescriptionDate, String expirationDate,
-                      Caregiver prescribingDoctor, String instructions, boolean isOverTheCounter,
-                      boolean isGeneric, String notes) {
+            Caregiver prescribingDoctor, String instructions, boolean isOverTheCounter,
+            boolean isGeneric, String notes) {
         this.name = name;
         this.dosage = dosage;
         this.frequency = frequency;

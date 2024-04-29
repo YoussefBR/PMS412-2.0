@@ -20,7 +20,8 @@ public class CreatePatientController {
     }
 
     private void onBack() {
-        // Handle logic to go back to the home screen, possibly hiding this view or showing another
+        // Handle logic to go back to the home screen, possibly hiding this view or
+        // showing another
         view.dispose();
     }
 

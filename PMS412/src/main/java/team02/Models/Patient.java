@@ -1,7 +1,5 @@
 package team02.Models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 import java.sql.Date;
 
@@ -11,25 +9,25 @@ public class Patient extends User {
     private String sex;
     private double weightInPounds;
     private double heightInInches;
-    private ArrayList<Record> records;
 
-    private ArrayList<Medication> medications;
+    // private ArrayList<Record> records;
+    // private ArrayList<Medication> medications;
 
-    public Patient(int userID, String name, String email, String phoneNumber, LocalDate birthDate, String sex, double weightInPounds, double heightInInches)
-    {
+    public Patient(int userID, String name, String email, String phoneNumber, LocalDate birthDate, String sex,
+            double weightInPounds, double heightInInches) {
         super(userID, name, email, phoneNumber);
         this.birthDate = birthDate;
         this.sex = sex;
         this.weightInPounds = weightInPounds;
         this.heightInInches = heightInInches;
-        
+
         // // ID's automatically assigned by DB
         // dbIntegration db = dbIntegration.getInstance();
         // Date sqlDate = Date.valueOf(birthDate);
-        // int patient_id = db.addPatient(name, email, phoneNumber, sqlDate, sex, weightInPounds, heightInInches);
+        // int patient_id = db.addPatient(name, email, phoneNumber, sqlDate, sex,
+        // weightInPounds, heightInInches);
         // setUserID(patient_id);
     }
-
 
     /**
      * Retrieves the birth date of the person.
@@ -49,7 +47,8 @@ public class Patient extends User {
         this.birthDate = birthDate;
         Date sqlDate = Date.valueOf(birthDate);
         dbIntegration db = dbIntegration.getInstance();
-        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds, heightInInches);
+        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds,
+                heightInInches);
     }
 
     /**
@@ -70,7 +69,8 @@ public class Patient extends User {
         this.sex = sex;
         Date sqlDate = Date.valueOf(birthDate);
         dbIntegration db = dbIntegration.getInstance();
-        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds, heightInInches);
+        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds,
+                heightInInches);
     }
 
     /**
@@ -91,7 +91,8 @@ public class Patient extends User {
         this.weightInPounds = weightInPounds;
         Date sqlDate = Date.valueOf(birthDate);
         dbIntegration db = dbIntegration.getInstance();
-        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds, heightInInches);
+        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds,
+                heightInInches);
     }
 
     /**
@@ -112,52 +113,57 @@ public class Patient extends User {
         this.heightInInches = heightInInches;
         Date sqlDate = Date.valueOf(birthDate);
         dbIntegration db = dbIntegration.getInstance();
-        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds, heightInInches);
+        db.updatePatient(getUserID(), getName(), getEmail(), getPhoneNumber(), sqlDate, sex, weightInPounds,
+                heightInInches);
     }
 
     // /**
-    //  * Retrieves a list of health records associated with the person.
-    //  *
-    //  * @return A List of health records for the person.
-    //  */
+    // * Retrieves a list of health records associated with the person.
+    // *
+    // * @return A List of health records for the person.
+    // */
 
     // public List<Record> getRecords() {
-    //     return records;
+    // return records;
     // }
 
     // /**
-    //  * Retrieves a list of medications associated with the patient.
-    //  *
-    //  * @return A List of Medication objects representing the medications prescribed to the patient.
-    //  */
+    // * Retrieves a list of medications associated with the patient.
+    // *
+    // * @return A List of Medication objects representing the medications
+    // prescribed to the patient.
+    // */
     // public List<Medication> getMedications() {
-    //     return medications;
+    // return medications;
     // }
 
     // /**
-    //  * Adds a new health record to the patient's list of records.
-    //  *
-    //  * @param record The health record to be added to the patient's records.
-    //  * @return a boolean representing whether the medication was successfully added
-    //  */
+    // * Adds a new health record to the patient's list of records.
+    // *
+    // * @param record The health record to be added to the patient's records.
+    // * @return a boolean representing whether the medication was successfully
+    // added
+    // */
 
     // public Boolean addRecord(Record record) {
-    //     // Implementation details...
-    //     records.add(record);
-    //     return true;
+    // // Implementation details...
+    // records.add(record);
+    // return true;
     // }
 
     // /**
-    //  * Adds a new medication to the patient's list of medications.
-    //  *
-    //  * @param medication The medication to be added to the patient's list of medications.
-    //  * @return a boolean representing whether the medication was successfully added
-    //  */
+    // * Adds a new medication to the patient's list of medications.
+    // *
+    // * @param medication The medication to be added to the patient's list of
+    // medications.
+    // * @return a boolean representing whether the medication was successfully
+    // added
+    // */
 
     // public Boolean addMedication(Medication medication) {
-    //     // Implementation details...
-    //     medications.add(medication);
-    //     return true;
+    // // Implementation details...
+    // medications.add(medication);
+    // return true;
     // }
 
 }

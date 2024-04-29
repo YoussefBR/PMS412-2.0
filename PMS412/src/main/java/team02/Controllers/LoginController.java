@@ -3,10 +3,8 @@ package team02.Controllers;
 import javax.swing.*;
 
 import team02.Models.Authenticator;
-import team02.Models.Caregiver;
 import team02.Models.dbIntegration;
 import team02.Views.CaregiverHomeScreen;
-import team02.Views.CaregiverInfoView;
 import team02.Views.LoginView;
 import team02.Views.PatientHomeScreen;
 
@@ -29,7 +27,7 @@ public class LoginController {
             boolean isPatient = db.isPatient(username);
             int id = isPatient ? db.getPatientID(username) : db.getEmployeeID(username);
 
-            if(isPatient){
+            if (isPatient) {
                 // Go to patient home screen
                 SwingUtilities.invokeLater(() -> {
                     PatientHomeScreen patientHomeScreen = new PatientHomeScreen(id);
@@ -38,14 +36,13 @@ public class LoginController {
             } else {
                 // Go to employee home screen
                 SwingUtilities.invokeLater(() -> {
-                    CaregiverHomeScreen caregiverHomeScreen = new CaregiverHomeScreen();
+                    CaregiverHomeScreen caregiverHomeScreen = new CaregiverHomeScreen(id);
                     new CaregiverHSController(caregiverHomeScreen);
                 });
-        
+
             }
         } else {
             JOptionPane.showMessageDialog(view, "Invalid username or password.");
         }
     }
 }
-

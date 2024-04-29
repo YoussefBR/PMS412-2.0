@@ -2,13 +2,12 @@ package team02.Views;
 
 import javax.swing.*;
 
-public class CaregiverInfoView extends JFrame{
+public class CaregiverInfoView extends JFrame {
     private JLabel userIDLabel;
     private JLabel emailLabel;
     private JTextField phoneNumberField;
 
     private JTextField departmentField;
-
 
     public JButton getBackButton() {
         return backButton;
@@ -20,7 +19,6 @@ public class CaregiverInfoView extends JFrame{
 
     private JButton backButton;
     private JButton saveButton;
-
 
     public JLabel getUserIDLabel() {
         return userIDLabel;
@@ -45,8 +43,6 @@ public class CaregiverInfoView extends JFrame{
     public void setPhoneNumberField(JTextField phoneNumberField) {
         this.phoneNumberField = phoneNumberField;
     }
-
-
 
     public JTextField getDepartmentField() {
         return departmentField;
