@@ -19,38 +19,41 @@ public class PatientInfoView extends JFrame {
     private JButton backButton;
     private JTabbedPane tabbedPane;
     private Patient patient;
-    private boolean isEmployee;
+    private boolean isModifiable;
 
-    public PatientInfoView(boolean isEmployee, Patient patient) {
+    public PatientInfoView(boolean isModifiable, Patient patient) {
         // Setup the main window
         setTitle("Patient Information");
-        this.isEmployee = isEmployee;
+        this.isModifiable = isModifiable;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);  // Removes the window borders and title bar
+        setUndecorated(true); // Removes the window borders and title bar
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        
+
         this.patient = patient;
 
         tabbedPane = new JTabbedPane();
-        JPanel contactPanel = setupContactPanel(isEmployee);
-        JPanel personalPanel = setupPersonalPanel(isEmployee);
+        JPanel contactPanel = setupContactPanel(isModifiable);
+        JPanel personalPanel = setupPersonalPanel(isModifiable);
 
         tabbedPane.addTab("Contact Info", contactPanel);
         tabbedPane.addTab("Personal Info", personalPanel);
         add(tabbedPane, BorderLayout.CENTER);
 
         saveButton = new JButton("Save");
-        backButton = new JButton("Back to Home Screen");
+        backButton = new JButton("Back");
 
-        add(saveButton, BorderLayout.SOUTH);
-        add(backButton, BorderLayout.NORTH);
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(saveButton);
+        bottomPanel.add(backButton);
+
+        add(bottomPanel, BorderLayout.SOUTH);
 
         pack();
         setVisible(true);
     }
 
-    private JPanel setupContactPanel(boolean isEmployee) {
+    private JPanel setupContactPanel(boolean isModifiable) {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = 1;
@@ -82,7 +85,7 @@ public class PatientInfoView extends JFrame {
         return panel;
     }
 
-    private JPanel setupPersonalPanel(boolean isEmployee) {
+    private JPanel setupPersonalPanel(boolean isModifiable) {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -90,26 +93,26 @@ public class PatientInfoView extends JFrame {
 
         gbc.gridx = 0;
         panel.add(new JLabel("Birthday:"), gbc);
-        birthdayField = createFormattedDateField(patient.getBirthDate().toString(), isEmployee);
+        birthdayField = createFormattedDateField(patient.getBirthDate().toString(), isModifiable);
         gbc.gridx = 1;
         panel.add(birthdayField, gbc);
 
         gbc.gridx = 0;
         panel.add(new JLabel("Sex:"), gbc);
         sexField = new JTextField(patient.getSex(), 10);
-        sexField.setEditable(isEmployee);
+        sexField.setEditable(isModifiable);
         gbc.gridx = 1;
         panel.add(sexField, gbc);
 
         gbc.gridx = 0;
-        panel.add(new JLabel("Height (cm):"), gbc);
-        heightField = createFormattedNumberField(patient.getheightInInches(), isEmployee, 10);
+        panel.add(new JLabel("Height (in):"), gbc);
+        heightField = createFormattedNumberField(patient.getheightInInches(), isModifiable, 10);
         gbc.gridx = 1;
         panel.add(heightField, gbc);
 
         gbc.gridx = 0;
-        panel.add(new JLabel("Weight (kg):"), gbc);
-        weightField = createFormattedNumberField(patient.getWeightInPounds(), isEmployee, 10);
+        panel.add(new JLabel("Weight (lbs):"), gbc);
+        weightField = createFormattedNumberField(patient.getWeightInPounds(), isModifiable, 10);
         gbc.gridx = 1;
         panel.add(weightField, gbc);
 
@@ -145,15 +148,47 @@ public class PatientInfoView extends JFrame {
     }
 
     // Getter methods for the controller to use
-    public JTextField getNameField() { return nameField; }
-    public JTextField getEmailField() { return emailField; }
-    public JTextField getPhoneField() { return phoneField; }
-    public JFormattedTextField getBirthdayField() { return birthdayField; }
-    public JTextField getSexField() { return sexField; }
-    public JFormattedTextField getHeightField() { return heightField; }
-    public JFormattedTextField getWeightField() { return weightField; }
-    public JButton getSaveButton() { return saveButton; }
-    public JButton getBackButton() { return backButton; }
-    public Patient getPatient(){ return patient; }
-    public boolean getIsEmployee(){ return isEmployee; }
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
+    public JTextField getPhoneField() {
+        return phoneField;
+    }
+
+    public JFormattedTextField getBirthdayField() {
+        return birthdayField;
+    }
+
+    public JTextField getSexField() {
+        return sexField;
+    }
+
+    public JFormattedTextField getHeightField() {
+        return heightField;
+    }
+
+    public JFormattedTextField getWeightField() {
+        return weightField;
+    }
+
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public boolean getIsModifiable() {
+        return isModifiable;
+    }
 }

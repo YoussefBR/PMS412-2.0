@@ -244,4 +244,19 @@ public class dbIntegration {
         }
         return patients;
     }
+
+    public boolean isPatientAssignedToDoctor(int patient_id, int doctor_id) {
+        try {
+            Statement statement = connect.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format(
+                    "select * from patient_assignments where patient_id = %d and employee_id = %d;", patient_id,
+                    doctor_id));
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return false;
+    }
 }

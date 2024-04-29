@@ -23,12 +23,14 @@ public class SearchPatientView extends JFrame {
 
     private ArrayList<Patient> patients;
     private ArrayList<Doctor> doctors;
+    private int id;
     private String role;
 
-    public SearchPatientView(ArrayList<Patient> patients, String role) {
+    public SearchPatientView(ArrayList<Patient> patients, int id) {
         super("Search Patient");
         this.patients = patients;
-        this.role = role;
+        this.id = id;
+        this.role = dbIntegration.getInstance().getRole(id);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -129,6 +131,10 @@ public class SearchPatientView extends JFrame {
 
     public JList<String> getDoctorList() {
         return doctorList;
+    }
+
+    public int getId() {
+        return id;
     }
 
     private void initDoctorAssignmentDialog() {

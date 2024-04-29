@@ -37,7 +37,7 @@ public class CaregiverHSController {
         dbIntegration db = dbIntegration.getInstance();
         ArrayList<Patient> patients = db.getPatients();
         SwingUtilities.invokeLater(() -> {
-            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getRole());
+            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getId());
             new SearchPatientController(searchPatientView);
         });
     }
@@ -47,7 +47,7 @@ public class CaregiverHSController {
         dbIntegration db = dbIntegration.getInstance();
         ArrayList<Patient> patients = db.getPatientsByDoctor(view.getId());
         SwingUtilities.invokeLater(() -> {
-            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getRole());
+            SearchPatientView searchPatientView = new SearchPatientView(patients, view.getId());
             new SearchPatientController(searchPatientView);
         });
     }

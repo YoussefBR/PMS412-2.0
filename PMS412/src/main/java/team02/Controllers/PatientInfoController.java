@@ -45,8 +45,7 @@ public class PatientInfoController {
         patient.setheightInInches(height);
 
         dbIntegration db = dbIntegration.getInstance();
-        System.out.println(view.getIsEmployee());
-        boolean successful = (!view.getIsEmployee()) ? db.updatePatient(patient.getUserID(), name, email, phone)
+        boolean successful = (!view.getIsModifiable()) ? db.updatePatient(patient.getUserID(), name, email, phone)
                 : db.updatePatient(patient.getUserID(), name, email, phone, Date.valueOf(birthday), sex, weight,
                         height);
 
@@ -55,9 +54,6 @@ public class PatientInfoController {
     }
 
     private void goBack() {
-        if (view.getIsEmployee()) {
-            view.dispose();
-        }
         view.dispose();
     }
 }

@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 
 public class CreatePatientView extends JFrame {
 
-    private JPanel panel1;
+    private JPanel panel;
     private JTextField nameField;
     private JTextField emailField;
-    private JTextField phonenumberField;
-    private JTextField birthDateField;
+    private JTextField phoneField;
+    private JTextField birthdayField;
     private JTextField sexField;
     private JTextField weightField;
     private JTextField heightField;
@@ -31,39 +31,77 @@ public class CreatePatientView extends JFrame {
     }
 
     private void initComponents() {
-        panel1 = new JPanel(new GridLayout(0, 2, 10, 10)); // Set layout for the panel
 
+        panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.LINE_START;
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         // Initialize text fields and buttons
         nameField = new JTextField();
         emailField = new JTextField();
-        phonenumberField = new JTextField();
-        birthDateField = createFormattedDateField();
+        phoneField = new JTextField();
+        birthdayField = createFormattedDateField();
         sexField = new JTextField();
         weightField = createFormattedNumberField(10);
         heightField = createFormattedNumberField(10);
-        backToHomescreenButton = new JButton("Back to Home Screen");
+        backToHomescreenButton = new JButton("Back");
         saveButton = new JButton("Save");
 
+        bottomPanel.add(saveButton);
+        bottomPanel.add(backToHomescreenButton);
+
         // Add components to the panel
-        panel1.add(new JLabel("Name:"));
-        panel1.add(nameField);
-        panel1.add(new JLabel("Email:"));
-        panel1.add(emailField);
-        panel1.add(new JLabel("Phone Number:"));
-        panel1.add(phonenumberField);
-        panel1.add(new JLabel("Birth Date:"));
-        panel1.add(birthDateField);
-        panel1.add(new JLabel("Sex:"));
-        panel1.add(sexField);
-        panel1.add(new JLabel("Weight:"));
-        panel1.add(weightField);
-        panel1.add(new JLabel("Height:"));
-        panel1.add(heightField);
-        panel1.add(backToHomescreenButton);
-        panel1.add(saveButton);
+        panel.add(new JLabel("Name:"), gbc);
+        nameField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(nameField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Email:"), gbc);
+        emailField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(emailField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Phone Number:"), gbc);
+        phoneField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(phoneField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Birthday:"), gbc);
+        birthdayField = createFormattedDateField();
+        gbc.gridx = 1;
+        panel.add(birthdayField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Sex:"), gbc);
+        sexField = new JTextField(10);
+        gbc.gridx = 1;
+        panel.add(sexField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Height (in):"), gbc);
+        heightField = createFormattedNumberField(10);
+        gbc.gridx = 1;
+        panel.add(heightField, gbc);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel("Weight (lbs):"), gbc);
+        weightField = createFormattedNumberField(10);
+        gbc.gridx = 1;
+        panel.add(weightField, gbc);
 
         // Add the panel to the frame
-        add(panel1);
+        add(panel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         pack(); // Pack the contents of the window and display it to its required size
         setLocationRelativeTo(null); // Center the window
         setVisible(true); // Make the frame visible
@@ -85,12 +123,12 @@ public class CreatePatientView extends JFrame {
         return emailField;
     }
 
-    public JTextField getPhoneNumberField() {
-        return phonenumberField;
+    public JTextField getPhoneField() {
+        return phoneField;
     }
 
-    public JTextField getBirthDateField() {
-        return birthDateField;
+    public JTextField getBirthdayField() {
+        return birthdayField;
     }
 
     public JTextField getSexField() {

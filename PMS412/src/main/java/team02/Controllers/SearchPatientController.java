@@ -56,8 +56,9 @@ public class SearchPatientController {
         }
         ArrayList<Patient> patients = view.getPatients();
         Patient selectedPatient = patients.get(row);
+        boolean isModifiable = assignedToDoctor(selectedPatient);
         SwingUtilities.invokeLater(() -> {
-            PatientInfoView patientInfoView = new PatientInfoView(true, selectedPatient);
+            PatientInfoView patientInfoView = new PatientInfoView(isModifiable, selectedPatient);
             new PatientInfoController(patientInfoView);
         });
     }
@@ -102,4 +103,11 @@ public class SearchPatientController {
         view.disposeDoctorAssignment();
     }
 
+    private boolean assignedToDoctor(Patient patient) {
+        String role = view.getRole();
+        if (role.equals("doctor")) {
+            return dbIntegration.getInstance().isPatientAssignedToDoctor(patient.getUserID(), view.getId());
+        }
+        return false;
+    }
 }

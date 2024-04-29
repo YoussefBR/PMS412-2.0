@@ -29,8 +29,8 @@ public class CreatePatientController {
         // Get data from view
         String name = view.getNameField().getText();
         String email = view.getEmailField().getText();
-        String phoneNumber = view.getPhoneNumberField().getText();
-        String birthDate = view.getBirthDateField().getText();
+        String phoneNumber = view.getPhoneField().getText();
+        String birthDate = view.getBirthdayField().getText();
         String sex = view.getSexField().getText();
         double weight = Double.parseDouble(view.getWeightField().getText());
         double height = Double.parseDouble(view.getHeightField().getText());
