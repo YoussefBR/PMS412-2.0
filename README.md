@@ -1,6 +1,6 @@
 ### April 21 group contributions
 
-youssef boshra-riad (yzb5142) 90-95% of the effort:
+youssef boshra-riad (yzb5142) 60% of the effort:
 
 - wrote dbIntegration
 - set up database
@@ -9,9 +9,15 @@ youssef boshra-riad (yzb5142) 90-95% of the effort:
 - implemented backend for patient creation/update use case for caregivers
 - implemented backend for patient lookup use case
 - implemented a permission system throughout the system so that patients have restricted access to the system
-- login view + its controller
 - patient info view + its controller (uses categorization UI design pattern I picked)
-- redesigned caregiver home screen view
+
+Carlos Dye (cmd6690) 40% of effort:
+- Redeisnged Login View
+- Made changes to views and controllers according to refactoring plan
+- Cretaed new home screen
+- Created new views for corresponding use cases
+- Implemented front end for use cases
+
 
 ### April 29 group contributions
 
@@ -25,6 +31,11 @@ youssef boshra-riad (yzb5142) 85% of the effort:
 - Re-designed all the views to have similar visual styles to improve overall system coherence
 - Fully implemented patient assignment use case
 
+  Carlos Dye (cmd6690) 15% of effort:
+  - Cretaed Test class for appointment
+  - Implemented appointment scheduleing use case
+  - Refactored both appointment model and controller
+    
 ### General Use Case and Design Pattern Contributions
 
 youssef boshra-riad (yzb5142):
@@ -36,6 +47,14 @@ youssef boshra-riad (yzb5142):
 - Assign Patient to Doctor as Admin use case
 - Singleton design pattern for Authenticator and dbIntegration classes
 - Categorization design pattern for PatientInfoView view
+
+  Carlos Dye (cmd6690):
+- Authentication/Login use case (View) 
+- View/Update Patient Info as Patient use case (View)
+- View/Update/Create Patient Info as Caregiver use case (View)
+- Search for Patient as Caregiver use case (View)
+- Assign Patient to Doctor as Admin use case
+- Appointment use case
 
 ### Use Instructions
 
