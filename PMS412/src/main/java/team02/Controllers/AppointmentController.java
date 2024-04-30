@@ -1,4 +1,4 @@
-package Controllers;
+package team02.Controllers;
 
 import team02.Models.Appointment;
 import team02.Models.Doctor;
