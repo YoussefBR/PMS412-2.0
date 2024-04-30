@@ -45,5 +45,4 @@ public class AppointmentController {
 
     public List<Appointment> getAppointments() {
         return new ArrayList<>(appointments);
-    }
-}
+ 
