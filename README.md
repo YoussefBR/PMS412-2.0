@@ -1,6 +1,6 @@
 ### April 21 group contributions
 
-youssef boshra-riad (yzb5142) 60% of the effort:
+youssef boshra-riad (yzb5142) 90%-95% of the effort:
 
 - wrote dbIntegration
 - set up database
@@ -9,11 +9,12 @@ youssef boshra-riad (yzb5142) 60% of the effort:
 - implemented backend for patient creation/update use case for caregivers
 - implemented backend for patient lookup use case
 - implemented a permission system throughout the system so that patients have restricted access to the system
-- patient info view + its controller (uses categorization UI design pattern I picked)
-
-Carlos Dye (cmd6690) 40% of effort:
 - Redeisnged Login View
 - Made changes to views and controllers according to refactoring plan
+- patient info view + its controller (uses categorization UI design pattern I picked)
+
+Carlos Dye (cmd6690) 5% of effort:
+- Designed Login view
 - Cretaed new home screen
 - Created new views for corresponding use cases
 - Implemented front end for use cases
